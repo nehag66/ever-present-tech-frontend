@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import "./Login.css";
+import Button from "../../components/Button/Button";
 
 class LoginBox extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
-  submitLogin(e) {
-    console.log("button clicked");
   }
 
   render() {
@@ -20,15 +17,15 @@ class LoginBox extends Component {
             <label className="login-head">Login form</label>
             <br />
             <label>Name</label>
-            <input type="text" />
+            <input type="text" required />
             <br />
             <label>Username</label>
-            <input type="text" />
+            <input type="text" required />
             <br />
             <label>Password</label>
-            <input type="password" />
+            <input type="password" required />
             <br />
-            <button className="btn">Login</button>
+            <Button />
           </div>
         </div>
       </div>
@@ -37,49 +34,3 @@ class LoginBox extends Component {
 }
 
 export default LoginBox;
-
-{
-  /* //   <div className="full-container">
-//         <div className="left-container"> HELOO</div>
-//         <div className="right-container">
-//           <div className="header">Login</div>
-//           <div className="box">
-//             <div className="input-group">
-//               <label htmlFor="username">Username</label>
-//               <input */
-}
-{
-  /* //                 type="text"
-//                 name="username"
-//                 className="login-input"
-//                 placeholder="Username"
-//               />
-//             </div>
-
-//             <div className="input-group">
-//               <label htmlFor="password">Password</label>
-//               <input */
-}
-{
-  /* //                 type="password"
-//                 name="password"
-//                 className="login-input"
-//                 placeholder="Password"
-//               />
-//             </div>
-
-//             <button */
-}
-{
-  /* //               type="button"
-//               className="login-btn"
-//               onClick={this.submitLogin.bind(this)}
-//             >
-//               Login
-//             </button>
-//           </div> */
-}
-{
-  /* //         </div>
-//       </div> */
-}
