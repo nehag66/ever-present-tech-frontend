@@ -8,8 +8,7 @@ const Home = (props) => {
         <div className="form">
           <label className="login-head">Welcome</label>
           <br />
-          <pr>As per our records, your details are as under:</pr>
-          <br />
+          <p>As per our records, your details are as under:</p>
           <label>Name</label>
           <input type="text" required />
           <br />
