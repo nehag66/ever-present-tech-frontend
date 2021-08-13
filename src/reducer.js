@@ -5,9 +5,11 @@
 //         state: { ...state, name: action.payload },
 //       };
 //     case "CHANGE_USERNAME":
-//       return { state: { ...state, emailid: action.payload } };
+//       return { state: { ...state, username: action.payload } };
 //     case "CHANGE_PASSWORD":
-//       return { state: { ...state, iban: action.payload } };
+//       return { state: { ...state, password: action.payload } };
+// default:
+// return {state: { ...state, password: action.payload }};
 //   }
 //   return state;
 // };

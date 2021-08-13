@@ -6,11 +6,11 @@ class Home extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    fetch("http://localhost:8080/getClients")
-      .then((response) => response.json())
-      .then((data) => console.log(data.clients));
-  }
+  //   componentDidMount() {
+  //     fetch("http://localhost:8080/getClients")
+  //       .then((response) => response.json())
+  //       .then((data) => console.log(data.clients));
+  //   }
 
   render() {
     return (

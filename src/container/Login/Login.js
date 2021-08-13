@@ -1,94 +1,85 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
-import { Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { connect } from "react-redux";
-// // import { addName } from "../../action";
-// // import { actionCreators } from "../../action";
+const Login = () => {
+  const history = useHistory();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [clients, setClients] = useState([]);
 
-// // const mapStateToProps = (state) => {
-// //   return {
-// //     names: state.names,
-// //   };
-// // };
-// // export default connect(mapStateToProps, { updateUserName, updatePassword })(
-// //   Login
-// // );
-
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: "", password: "" };
-    this.handleStateChange = this.handleStateChange.bind(this);
-  }
-
-  componentDidMount() {
-    fetch("http://localhost:8080/getClients")
+  useEffect(() => {
+    fetch("http://localhost:8080/getClients", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
-      .then((data) => console.log(data.clients));
-  }
-  handleStateChange(state) {
-    console.log("clicked");
-    this.setState({
-      username: "neha",
-      password: "neha",
-    });
-    console.log(this.username, this.password);
-  }
+      .then((data) => {
+        //setClients(data);
+        setClients(data.clients.id);
+        console.log(clients);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [clients]);
 
-  //   componentDidUpdate() {
-  //     fetch("http://localhost:8080/getClients")
-  //       .then((response) => response.json())
-  //       .then((data) => console.log(data));
-  //   }
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    console.log("Username Entered:", username);
+    console.log("Password Entered:", password);
+    console.log(typeof clients);
+    history.push("/home");
+    // clients.map((client) => {
+    //   console.log(client);
+    //   if (
+    //     client.user.user_name === username &&
+    //     client.user.password === password
+    //   ) {
+    //     console.log("Matched!!");
+    //   } else {
+    //     console.log("Failed chala de");
+    //   }
+    //
+    // });
+  };
 
-  render() {
-    return (
-      <div>
-        <div className="container">
-          <div className="logo">Logo</div>
-          <div className="form">
-            <label className="login-head">Login form</label>
-            <br />
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              // value=""
-              // onChange={(e) => actionCreators.updateUserName(e.target.value)}
-              required
-            />
-            <br />
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              // value=""
-              // onChange={(e) => actionCreators.updatePassword(e.target.value)}
-              required
-            />
-            <br />
-            <Route
-              render={({ history }) => (
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={() => {
-                    this.handleStateChange();
-                    history.push("/home");
-                  }}
-                >
-                  Login
-                </button>
-              )}
-            />
-          </div>
+  return (
+    <div>
+      <div className="container">
+        <div className="logo">Logo</div>
+        <div className="form">
+          <label className="login-head">Login form</label>
+          <br />
+          <label>Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <br />
+
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <br />
+          <button className="btn" type="submit" onClick={onClickHandler}>
+            Login
+          </button>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;
