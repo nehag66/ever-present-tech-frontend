@@ -7,43 +7,36 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [clients, setClients] = useState([]);
+  const [authentication, setAuthentication] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/getClients", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch("http://localhost:8080/getClients")
       .then((response) => response.json())
       .then((data) => {
-        //setClients(data);
-        setClients(data.clients.id);
-        console.log(clients);
-      })
-      .catch((err) => {
-        console.log(err);
+        setClients(data.clients);
       });
-  }, [clients]);
+  }, []);
 
   const onClickHandler = (e) => {
     e.preventDefault();
-    console.log("Username Entered:", username);
-    console.log("Password Entered:", password);
-    console.log(typeof clients);
-    history.push("/home");
-    // clients.map((client) => {
-    //   console.log(client);
-    //   if (
-    //     client.user.user_name === username &&
-    //     client.user.password === password
-    //   ) {
-    //     console.log("Matched!!");
-    //   } else {
-    //     console.log("Failed chala de");
-    //   }
-    //
-    // });
+    //console.log("Username Entered:", username);
+    //console.log("Password Entered:", password);
+    for (let i = 0; i < clients.length; i++) {
+      if (
+        clients[i].user.user_name === username &&
+        clients[i].user.password === password
+      ) {
+        //console.log("Matched!!");
+        setAuthentication(true);
+        history.push({
+          pathname: "/home",
+          state: { props: clients[i] },
+        });
+        break;
+      } else {
+        console.log("Authentication Failed");
+      }
+    }
   };
 
   return (
@@ -51,7 +44,7 @@ const Login = () => {
       <div className="container">
         <div className="logo">Logo</div>
         <div className="form">
-          <label className="login-head">Login form</label>
+          <label className="login-head">Login</label>
           <br />
           <label>Username</label>
           <input
@@ -62,7 +55,6 @@ const Login = () => {
             required
           />
           <br />
-
           <label>Password</label>
           <input
             type="password"
@@ -71,10 +63,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
           <br />
           <button className="btn" type="submit" onClick={onClickHandler}>
-            Login
+            Sign in
           </button>
         </div>
       </div>
