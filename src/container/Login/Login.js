@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const history = useHistory();
@@ -35,6 +36,10 @@ const Login = () => {
         break;
       } else {
         console.log("Authentication Failed");
+        Swal.fire({
+          icon: "error",
+          text: "Either Username or Password is incorrect",
+        });
       }
     }
   };
