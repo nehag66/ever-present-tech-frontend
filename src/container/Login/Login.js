@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <div>
       <div className="container">
-        <div className="logo">Logo</div>
+        <div className="logo">GOOD FOOD</div>
         <div className="form">
           <label className="login-head">Login</label>
           <br />
